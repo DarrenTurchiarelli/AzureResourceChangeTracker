@@ -1,0 +1,2 @@
+# AzureResourceChangeTracker
+Azure resources get changed through the course of daily use, reconfiguration, and even redeployment. Change can come from an individual or by an automated process, but while most change is by design, any change could cause crucial security, compliance, or operational issues. With the last 14 days of resource changes, the new Change History capability within the Azure Resource Graph API enables you to find when changes were detected on an Azure Resource Manager property as well as see what properties changed as part of that change event.
