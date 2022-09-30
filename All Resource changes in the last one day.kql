@@ -1,0 +1,7 @@
+resourcechanges
+| extend changeTime = todatetime(properties.changeAttributes.timestamp), targetResourceId = tostring(properties.targetResourceId),
+changeType = tostring(properties.changeType), correlationId = properties.changeAttributes.correlationId, 
+changedProperties = properties.changes, changeCount = properties.changeAttributes.changesCount
+| where changeTime > ago(1d)
+| join kind=inner (resources | project resources_Name = name, resources_Type = type, resources_Subscription= subscriptionId, resources_ResourceGroup= resourceGroup, id) on $left.targetResourceId == $right.id 
+| project resources_Name, resources_Type, resources_Subscription, resources_ResourceGroup, changeTime, targetResourceId, changeType, correlationId, changeCount, changedProperties

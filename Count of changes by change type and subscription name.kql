@@ -1,0 +1,6 @@
+resourcechanges  
+|extend changeType = tostring(properties.changeType), changeTime = todatetime(properties.changeAttributes.timestamp), targetResourceType=tostring(properties.targetResourceType)  
+| summarize count() by changeType, subscriptionId 
+| join (resourcecontainers | where type=='microsoft.resources/subscriptions' | project SubscriptionName=name, subscriptionId) on subscriptionId 
+| project-away subscriptionId, subscriptionId1
+| order by count_ desc
